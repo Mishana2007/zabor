@@ -72,12 +72,12 @@ p {
 
 /* Кнопка "Позвонить" */
 .call-btn {
-    padding: 10px 20px;
+    padding: 5px 15px;
     background-color: #FFC107;
     color: #333;
     border: none;
     border-radius: 5px;
-    font-size: 16px;
+    font-size: 12px;
     cursor: pointer;
     transition: background 0.3s;
 }
@@ -613,22 +613,27 @@ p {
 
 /* Всплывающее окно */
 .catalog-popup {
-    display: none;
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%) scale(0.9);
-    background: #3b2e25;
-    color: #fff;
-    width: 90%;
+    transform: translate(-50%, -50%);
+    width: 80%;
     max-width: 600px;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    text-align: center;
+    max-height: 80vh; /* Ограничиваем высоту */
+    background: rgb(145, 113, 100);
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    overflow-y: auto; /* Добавляем вертикальный скролл */
+    display: none;
     z-index: 1000;
-    opacity: 0;
-    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+
+.popup-content {
+    max-height: 70vh; /* Ограничиваем высоту контента */
+    overflow-y: auto; /* Добавляем прокрутку */
+    padding-right: 10px; /* Добавляем немного отступа, чтобы контент не прилипал */
 }
 
 
@@ -650,11 +655,23 @@ body.no-scroll {
     position: absolute;
     top: 10px;
     right: 15px;
-    border: none;
     background: none;
-    font-size: 32px;
-    color: white;
+    border: none;
+    font-size: 25px;
     cursor: pointer;
+    color: #fff;
+}
+
+
+@media (max-width: 768px) {
+    .catalog-popup {
+        width: 90%;
+        max-height: 90vh;
+    }
+
+    .popup-content {
+        max-height: 85vh;
+    }
 }
 
 /* Карусель фото */
@@ -1144,29 +1161,28 @@ body.no-scroll {
 }
 
 /* Контейнер для фильтров */
-.catalog-filters {
+.catalog-filter {
     display: flex;
-    justify-content: center;
-    gap: 12px;
     flex-wrap: wrap;
-    margin-top: 60px; /* Увеличенный отступ сверху */
-    padding: 10px 0;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px 0;
+    margin-top: 70px; /* Отступ вниз от меню */
+    background: #5a3e1b;
+    border-bottom: 3px solid #d4af37;
 }
 
 /* Стиль кнопок фильтра */
 .filter-btn {
-    background: #c7a24e; /* Золотистый */
+    background: linear-gradient(45deg, #d4af37, #b8860b);
     color: white;
-    border: none;
-    padding: 12px 18px;
-    border-radius: 8px;
     font-size: 16px;
-    cursor: pointer;
-    transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
     font-weight: bold;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
 /* Иконки */
@@ -1176,13 +1192,14 @@ body.no-scroll {
 
 /* Эффект наведения */
 .filter-btn:hover {
-    background: #b88f3a;
+    background: linear-gradient(45deg, #b8860b, #d4af37);
     transform: scale(1.05);
 }
 
 /* Активная кнопка */
 .filter-btn.active {
-    background: #8b6c3c;
+    background: #8b5e34;
+    color: #fff;
 }
 
 /* Адаптация под мобильные устройства */
@@ -1197,3 +1214,7 @@ body.no-scroll {
         padding: 10px 14px;
     }
 }
+
+
+
+

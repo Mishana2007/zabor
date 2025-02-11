@@ -3,126 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Каталог товаров</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Подключение стилей -->
+    <title>ZABOR_ID - Каталог</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
 </head>
 <body>
 
-    <!-- Кнопка "Назад" -->
-    <div class="back-button-container">
-        <button class="back-button" onclick="goBack()"> Назад</button>
-    </div>
+    <!-- Шапка -->
+    <header class="header">
+        <div class="logo">ZABOR_ID</div>
+        <nav class="menu">
+            <a href="index.html">Главная</a>
+            <a href="#">О нас</a>
+            <a href="#">Наши работы</a>
+            <a href="#">Отзывы</a>
+            <a href="#">Контакты</a>
+        </nav>
+        <button class="call-btn">Позвонить</button>
+        <div class="burger-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+    
+    <!-- Добавляем мобильное меню -->
+    <nav class="mobile-menu">
+        <a href="index.html">Главная</a>
+        <a href="#">О нас</a>
+        <a href="#">Наши работы</a>
+        <a href="#">Отзывы</a>
+        <a href="#">Контакты</a>
+    </nav>
 
-
-    <!-- Фильтр категорий -->
-<div class="catalog-filters">
-    <button class="filter-btn active" data-filter="all">
-        <i class="fas fa-th-large"></i>
-        <span>Все товары</span>
-    </button>
-    <button class="filter-btn" data-filter="zabor">
-        <i class="fas fa-border-all"></i>
-        <span>Заборы</span>
-    </button>
-    <button class="filter-btn" data-filter="vorota">
-        <i class="fas fa-door-closed"></i>
-        <span>Ворота</span>
-    </button>
-    <button class="filter-btn" data-filter="raspashnye">
-        <i class="fas fa-arrows-alt-h"></i>
-        <span>Распашные ворота</span>
-    </button>
-    <button class="filter-btn" data-filter="otkatnye">
-        <i class="fas fa-long-arrow-alt-right"></i>
-        <span>Откатные ворота</span>
-    </button>
-    <button class="filter-btn" data-filter="setka">
-        <i class="fas fa-grip-lines"></i>
-        <span>Заборы из сетки</span>
-    </button>
-    <button class="filter-btn" data-filter="kalitka">
-        <i class="fas fa-door-open"></i>
-        <span>Калитки</span>
-    </button>
-    <button class="filter-btn" data-filter="accessories">
-        <i class="fas fa-tools"></i>
-        <span>Аксессуары</span>
-    </button>
-</div>
+    <!-- Фильтр товаров -->
+    <section class="catalog-filter">
+        <button class="filter-btn active" data-filter="all">Все товары</button>
+        <button class="filter-btn" data-filter="zabor">Заборы</button>
+        <button class="filter-btn" data-filter="vorota">Ворота</button>
+        <button class="filter-btn" data-filter="kalitka">Калитки</button>
+        <button class="filter-btn" data-filter="accessories">Аксессуары</button>
+    </section>
 
     <section id="catalog" class="catalog">
         <div class="container">
             <h2 class="catalog-title">Каталог товаров</h2>
 
             <div class="catalog-grid">
-                <!-- 1. Забор из профнастила -->
-                <div class="catalog-item">
-                    <div class="carousel" data-carousel>
-                        <button class="prev" data-carousel-button="prev">&#10094;</button>
+                <!-- Забор из профнастила -->
+                <div class="catalog-item zabor">
+                    <div class="carousel">
+                        <button class="prev">&#10094;</button>
                         <div class="carousel-track">
-                            <img src="img/профнастОдинЦвет1.jpg" alt="Забор из профнастила" class="active">
-                            <img src="img/профнастОдинЦвет2.jpg" alt="Забор из профнастила">
+                            <img src="img/профнастОдинЦвет1.jpg" class="active">
+                            <img src="img/профнастОдинЦвет2.jpg">
                         </div>
-                        <button class="next" data-carousel-button="next">&#10095;</button>
+                        <button class="next">&#10095;</button>
                     </div>
-                    <h3>Забор из профнастила в один цвет</h3>
+                    <h3>Забор из профнастила</h3>
                     <p>Прочный и долговечный забор из профнастила.</p>
-                    <button class="btn btn-details" 
-                            data-title="Забор из профнастила" 
-                            data-description="Прочный металлический забор, выполненный из профнастила. Отлично подходит для частных домов и дачных участков."
-                            data-height="Высота: 2 м"
-                            data-columns="Столбы: профильная труба 60х60х2мм"
-                            data-logs="Лаги: профильная труба 40х20х1.5мм"
-                            data-price="2350"
-                            data-images='["img/профнастОдинЦвет1.jpg", "img/профнастОдинЦвет2.jpg"]'>
+                    <button class="btn btn-details"
+                        data-title="Забор из профнастила" 
+                        data-description="Прочный металлический забор. Отлично подходит для частных домов."
+                        data-height="Высота: 2 м"
+                        data-columns="Столбы: профильная труба 60х60х2мм"
+                        data-logs="Лаги: профильная труба 40х20х1.5мм"
+                        data-price="2350"
+                        data-images='["img/профнастОдинЦвет1.jpg", "img/профнастОдинЦвет2.jpg"]'>
                         Подробнее
                     </button>
                 </div>
 
-                <!-- 2. Забор из евро штакетника -->
-                <div class="catalog-item">
-                    <div class="carousel" data-carousel>
-                        <button class="prev" data-carousel-button="prev">&#10094;</button>
+                <!-- Ворота -->
+                <div class="catalog-item vorota">
+                    <div class="carousel">
+                        <button class="prev">&#10094;</button>
                         <div class="carousel-track">
-                            <img src="img/штакетник1.jpg" alt="Забор из евро штакетника" class="active">
-                            <img src="img/штакетник2.jpg" alt="Забор из евро штакетника">
+                            <img src="img/ВотОткатЕврошка1.jpg" class="active">
+                            <img src="img/ВотОткатЕврошка2.jpg">
                         </div>
-                        <button class="next" data-carousel-button="next">&#10095;</button>
+                        <button class="next">&#10095;</button>
                     </div>
-                    <h3>Забор из евро штакетника</h3>
-                    <p>Современный и эстетичный вариант забора.</p>
+                    <h3>Откатные ворота</h3>
+                    <p>Из шахматного евроштакетника.</p>
                     <button class="btn btn-details" 
-                            data-title="Забор из евро штакетника" 
-                            data-description="Эстетичный забор, выполненный из металлических штакетин, подходит для загородных домов."
-                            data-height="Высота: 2.5 м"
-                            data-columns="Столбы: профильная труба 80х80х2мм"
-                            data-logs="Лаги: профильная труба 50х25х2мм"
-                            data-price="3100"
-                            data-images='["img/штакетник1.jpg", "img/штакетник2.jpg"]'>
-                        Подробнее
-                    </button>
-                </div>
-
-                <!-- 3. Калитка из профнастила -->
-                <div class="catalog-item">
-                    <div class="carousel" data-carousel>
-                        <button class="prev" data-carousel-button="prev">&#10094;</button>
-                        <div class="carousel-track">
-                            <img src="img/калитка1.jpg" alt="Калитка из профнастила" class="active">
-                            <img src="img/калитка2.jpg" alt="Калитка из профнастила">
-                        </div>
-                        <button class="next" data-carousel-button="next">&#10095;</button>
-                    </div>
-                    <h3>Калитка из профнастила</h3>
-                    <p>Надежная калитка для вашего участка.</p>
-                    <button class="btn btn-details" 
-                            data-title="Калитка из профнастила" 
-                            data-description="Прочная и удобная калитка для защиты участка."
-                            data-height="Высота: 2 м"
-                            data-columns="Каркас: профильная труба 40х40х2мм"
-                            data-logs="Петли: усиленные 3 шт."
-                            data-price="12000"
-                            data-images='["img/калитка1.jpg", "img/калитка2.jpg"]'>
+                        data-title="Откатные ворота" 
+                        data-description="Ворота из евроштакетника в шахматном порядке" 
+                        data-price="78000"
+                        data-images='["img/ВотОткатЕврошка1.jpg", "img/ВотОткатЕврошка2.jpg"]'>
                         Подробнее
                     </button>
                 </div>
@@ -130,7 +98,7 @@
         </div>
     </section>
 
-    <!-- Затемняющий фон -->
+    <!-- Затемняющий фон (только один раз) -->
     <div class="popup-overlay" id="popup-overlay"></div>
 
     <!-- Всплывающее окно -->
@@ -140,9 +108,7 @@
         <!-- Карусель фото -->
         <div class="popup-carousel">
             <button class="prev" id="popup-prev">&#10094;</button>
-            <div class="popup-carousel-track" id="popup-carousel-track">
-                <img src="" alt="Фото услуги" class="popup-carousel-image active">
-            </div>
+            <div class="popup-carousel-track" id="popup-carousel-track"></div>
             <button class="next" id="popup-next">&#10095;</button>
         </div>
 
@@ -159,12 +125,12 @@
             <!-- Цена жирным и большим шрифтом -->
             <p class="popup-price">Цена от: <span id="popup-price">XX XXX</span> ₽</p>
 
-            <!-- Желтая разделительная линия -->
+            <!-- Разделительная линия -->
             <div class="popup-divider"></div>
 
             <!-- Блок с информацией -->
             <div class="popup-info">
-                <p>Специалисты нашей компании выполнят весь комплекс работ по установке заборов и ворот "под ключ":</p>
+                <p>Мы выполняем весь комплекс работ по установке:</p>
                 <ul>
                     <li>⚒️ Демонтаж, расчистка территории.</li>
                     <li>🔋 При необходимости привезём свой электрогенератор.</li>
@@ -175,12 +141,6 @@
             </div>
         </div>
     </div>
-
-    <script>
-        function goBack() {
-            window.history.back();
-        }
-    </script>
 
 </body>
 </html>

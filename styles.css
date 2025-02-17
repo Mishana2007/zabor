@@ -348,7 +348,10 @@ p {
     }
 
     .carousel {
-        height: 180px; /* Немного уменьшаем изображения на мобильных */
+        height: 250px;
+    }
+    .carousel img {
+        max-height: 230px;
     }
 
     .btn-details {
@@ -379,30 +382,30 @@ p {
 /* Карусель изображений */
 .carousel {
     width: 100%;
-    height: 200px; /* Фиксированная высота для всех фото */
+    height: 300px; /* Увеличиваем высоту контейнера */
     position: relative;
     overflow: hidden;
     border-radius: 10px;
-}
-
-
-.carousel-track img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Обрезка фото для одинакового размера */
+    display: flex; /* Добавляем flex */
+    align-items: center; /* Центрируем по вертикали */
+    justify-content: center; /* Центрируем по горизонтали */
 }
 
 .carousel-track {
     width: 100%;
+    height: 100%; /* Занимаем всю высоту родителя */
     display: flex;
-    justify-content: center;
+    align-items: center; /* Центровка по вертикали */
 }
 
 .carousel img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
+    width: auto; /* Меняем на auto */
+    height: auto; /* Убираем фиксированную высоту */
+    max-width: 100%; /* Ограничиваем по ширине */
+    max-height: 280px; /* Максимальная высота с отступом */
+    object-fit: contain; /* Меняем cover на contain */
     display: none;
+    margin: 0 auto; /* Центрируем изображение */
 }
 
 .carousel img.active {
@@ -598,6 +601,7 @@ p {
 
 
 
+/* Затемнение фона */
 .popup-overlay {
     display: none;
     position: fixed;
@@ -611,148 +615,182 @@ p {
     transition: opacity 0.3s ease-in-out;
 }
 
-/* Всплывающее окно */
+/* Основное окно попапа */
 .catalog-popup {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 80%;
-    max-width: 600px;
-    max-height: 80vh; /* Ограничиваем высоту */
+    width: 90%;
+    max-width: 700px;
+    max-height: 90vh;
     background: rgb(145, 113, 100);
     border-radius: 15px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    padding: 20px;
-    overflow-y: auto; /* Добавляем вертикальный скролл */
+    padding: 25px;
+    overflow-y: auto;
     display: none;
     z-index: 1000;
 }
 
-
+/* Контентная область */
 .popup-content {
-    max-height: 70vh; /* Ограничиваем высоту контента */
-    overflow-y: auto; /* Добавляем прокрутку */
-    padding-right: 10px; /* Добавляем немного отступа, чтобы контент не прилипал */
+    max-height: 80vh;
+    overflow-y: auto;
+    padding-right: 15px;
 }
 
-
-body.no-scroll {
-    overflow: hidden;
-}
-
-
-/* Плавное появление */
-.catalog-popup.active,
-.popup-overlay.active {
-    display: block;
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-}
-
-/* Крестик закрытия */
-.popup-close {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    background: none;
-    border: none;
-    font-size: 25px;
-    cursor: pointer;
-    color: #fff;
-}
-
-
-@media (max-width: 768px) {
-    .catalog-popup {
-        width: 90%;
-        max-height: 90vh;
-    }
-
-    .popup-content {
-        max-height: 85vh;
-    }
-}
-
-/* Карусель фото */
+/* Карусель с полноразмерными фото */
 .popup-carousel {
     position: relative;
     width: 100%;
-    overflow: hidden;
-    margin-top: 10px;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
     border-radius: 8px;
 }
 
-/* Контейнер картинок */
 .popup-carousel-track {
-    display: flex;
-    transition: transform 0.3s ease-in-out;
     width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-/* Фото ровные и четкие */
 .popup-carousel-image {
-    width: 100%;
-    max-height: 180px;
-    object-fit: cover;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 380px;
+    object-fit: contain;
     display: none;
     border-radius: 8px;
+    margin: 0 auto;
 }
 
 .popup-carousel-image.active {
     display: block;
 }
 
-/* Цена - жирная и большая */
+/* Кнопки навигации */
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 12px;
+    cursor: pointer;
+    font-size: 24px;
+    border-radius: 50%;
+    transition: 0.3s;
+    z-index: 2;
+}
+
+.prev:hover, .next:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.prev { left: 15px; }
+.next { right: 15px; }
+
+/* Адаптив для мобильных */
+@media (max-width: 768px) {
+    .catalog-popup {
+        width: 95%;
+        padding: 15px;
+    }
+    
+    .popup-carousel {
+        height: 300px;
+    }
+    
+    .popup-carousel-image {
+        max-height: 280px;
+    }
+    
+    .prev, .next {
+        padding: 10px;
+        font-size: 20px;
+    }
+}
+
+/* Остальные стили */
+.popup-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: #fff;
+}
+
 .popup-price {
     font-size: 22px;
     font-weight: bold;
     color: #ffcc00;
-    margin-top: 15px;
+    margin: 20px 0;
 }
 
-/* Желтая разделительная линия */
 .popup-divider {
     width: 80%;
     height: 3px;
     background: #ffcc00;
-    margin: 15px auto;
+    margin: 20px auto;
     border-radius: 2px;
 }
 
-/* Блок информации */
 .popup-info {
     text-align: left;
     background: rgba(255, 255, 255, 0.1);
-    padding: 15px;
+    padding: 20px;
     border-radius: 8px;
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
 .popup-info p {
     font-size: 16px;
     font-weight: bold;
     color: #f1c27b;
+    margin-bottom: 15px;
 }
 
 .popup-info ul {
     list-style: none;
     padding: 0;
-    margin: 10px 0;
+    margin: 15px 0;
 }
 
 .popup-info li {
     font-size: 14px;
     color: #ddd;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
+    line-height: 1.5;
 }
 
-/* Контактный призыв */
 .popup-call {
     font-size: 16px;
     font-weight: bold;
     text-align: center;
     color: #ffcc00;
+    margin-top: 20px;
+}
+
+body.no-scroll {
+    overflow: hidden;
+}
+
+.catalog-popup.active,
+.popup-overlay.active {
+    display: block;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
 }
 
 

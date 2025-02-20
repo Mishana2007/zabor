@@ -1,164 +1,220 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // 📌 Открытие/закрытие мобильного меню
-    const burgerMenu = document.querySelector('.burger-menu');
-    const mobileMenu = document.querySelector('.mobile-menu');
+    // 📌 Мобильное меню
+    function initMobileMenu() {
+        const burgerMenu = document.querySelector('.burger-menu');
+        const mobileMenu = document.querySelector('.mobile-menu');
 
-    if (burgerMenu && mobileMenu) {
-        burgerMenu.addEventListener('click', () => {
-            mobileMenu.classList.toggle('open');
-        });
+        if (!burgerMenu || !mobileMenu) {
+            console.error("❌ Ошибка: элементы меню не найдены");
+            return;
+        }
 
+        const toggleMenu = () => mobileMenu.classList.toggle('open');
+        const closeMenu = () => mobileMenu.classList.remove('open');
+
+        burgerMenu.addEventListener('click', toggleMenu);
         document.querySelectorAll('.mobile-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.remove('open');
-            });
+            link.addEventListener('click', closeMenu);
         });
-    } else {
-        console.error("❌ Ошибка: .burger-menu или .mobile-menu не найдены в DOM.");
     }
 
-    // 📌 Карусель для изображений товаров
-    document.querySelectorAll("[data-carousel]").forEach(carousel => {
-        let track = carousel.querySelector(".carousel-track");
-        if (!track) return;
+    // 📌 Карусели товаров
+    function initProductCarousels() {
+        document.querySelectorAll('.carousel').forEach(carousel => {
+            const track = carousel.querySelector('.carousel-track');
+            const images = track?.querySelectorAll('img');
+            const prev = carousel.querySelector('.prev');
+            const next = carousel.querySelector('.next');
+            
+            if (!images || images.length < 2 || !prev || !next) return;
 
-        let images = track.querySelectorAll("img");
-        let currentIndex = 0;
+            let currentIndex = 0;
+            const maxIndex = images.length - 1;
 
-        function updateCarousel() {
-            images.forEach((img, index) => {
-                img.classList.toggle("active", index === currentIndex);
-            });
-        }
+            const updateCarousel = () => {
+                images.forEach((img, idx) => {
+                    img.classList.toggle('active', idx === currentIndex);
+                });
+            };
 
-        const nextButton = carousel.querySelector("[data-carousel-button='next']");
-        const prevButton = carousel.querySelector("[data-carousel-button='prev']");
-
-        if (nextButton && prevButton) {
-            nextButton.addEventListener("click", () => {
-                currentIndex = (currentIndex + 1) % images.length;
+            prev.addEventListener('click', () => {
+                currentIndex = currentIndex > 0 ? currentIndex - 1 : maxIndex;
                 updateCarousel();
             });
 
-            prevButton.addEventListener("click", () => {
-                currentIndex = (currentIndex - 1 + images.length) % images.length;
+            next.addEventListener('click', () => {
+                currentIndex = currentIndex < maxIndex ? currentIndex + 1 : 0;
                 updateCarousel();
             });
-        }
 
-        updateCarousel();
-    });
+            updateCarousel();
+        });
+    }
 
     // 📌 Фильтрация товаров
-    const filterButtons = document.querySelectorAll(".filter-btn");
-    const catalogItems = document.querySelectorAll(".catalog-item");
+    function initCatalogFilter() {
+        const filterButtons = document.querySelectorAll(".filter-btn");
+        const catalogItems = document.querySelectorAll(".catalog-item");
 
-    filterButtons.forEach(button => {
-        button.addEventListener("click", function () {
-            filterButtons.forEach(btn => btn.classList.remove("active"));
-            this.classList.add("active");
+        filterButtons.forEach(button => {
+            button.addEventListener("click", function () {
+                filterButtons.forEach(btn => btn.classList.remove("active"));
+                this.classList.add("active");
 
-            const filter = this.dataset.filter;
-
-            catalogItems.forEach(item => {
-                item.style.display = filter === "all" || item.classList.contains(filter) ? "flex" : "none";
+                const filter = this.dataset.filter;
+                catalogItems.forEach(item => {
+                    item.style.display = filter === "all" || item.classList.contains(filter) 
+                        ? "flex" 
+                        : "none";
+                });
             });
         });
-    });
+    }
 
-    // 📌 Всплывающее окно "Подробнее"
-    const detailsButtons = document.querySelectorAll(".btn-details");
-    const popupOverlay = document.getElementById("popup-overlay");
-    const catalogPopup = document.getElementById("catalog-popup");
-    const closePopupButton = document.getElementById("popup-close");
-    const popupTitle = document.getElementById("popup-title");
-    const popupDescription = document.getElementById("popup-description");
-    const popupPrice = document.getElementById("popup-price");
-    const popupHeight = document.getElementById("popup-height");
-    const popupColumns = document.getElementById("popup-columns");
-    const popupLogs = document.getElementById("popup-logs");
-    const popupCarouselTrack = document.getElementById("popup-carousel-track");
-    const popupPrev = document.getElementById("popup-prev");
-    const popupNext = document.getElementById("popup-next");
+    // 📌 Всплывающее окно с деталями
+    function initPopup() {
+        const elements = {
+            detailsButtons: document.querySelectorAll(".btn-details"),
+            popupOverlay: document.getElementById("popup-overlay"),
+            catalogPopup: document.getElementById("catalog-popup"),
+            closePopupButton: document.getElementById("popup-close"),
+            popupTitle: document.getElementById("popup-title"),
+            popupDescription: document.getElementById("popup-description"),
+            popupPrice: document.getElementById("popup-price"),
+            popupHeight: document.getElementById("popup-height"),
+            popupColumns: document.getElementById("popup-columns"),
+            popupLogs: document.getElementById("popup-logs"),
+            popupCarouselTrack: document.getElementById("popup-carousel-track"),
+            popupPrev: document.getElementById("popup-prev"),
+            popupNext: document.getElementById("popup-next")
+        };
 
-    let currentImageIndex = 0;
-    let images = [];
+        let currentImageIndex = 0;
+        let images = [];
 
-    detailsButtons.forEach(button => {
-        button.addEventListener("click", function () {
-            popupTitle.textContent = this.getAttribute("data-title") || "Название отсутствует";
-            popupDescription.textContent = this.getAttribute("data-description") || "Описание отсутствует";
-            popupPrice.textContent = (this.getAttribute("data-price") || "0") + " ₽";
+        const updatePopupCarousel = () => {
+            elements.popupCarouselTrack.innerHTML = images
+                .map((src, idx) => `
+                    <img src="${src}" 
+                         alt="Фото услуги" 
+                         class="popup-carousel-image ${idx === currentImageIndex ? 'active' : ''}">
+                `).join('');
+        };
 
-            popupHeight.textContent = this.getAttribute("data-height") || "";
-            popupColumns.textContent = this.getAttribute("data-columns") || "";
-            popupLogs.textContent = this.getAttribute("data-logs") || "";
+        const showPopup = (button) => {
+            const getData = (attr) => button.getAttribute(attr) || '';
+            
+            elements.popupTitle.textContent = getData('data-title');
+            elements.popupDescription.textContent = getData('data-description');
+            elements.popupPrice.textContent = `${getData('data-price')} ₽`;
+            elements.popupHeight.textContent = getData('data-height');
+            elements.popupColumns.textContent = getData('data-columns');
+            elements.popupLogs.textContent = getData('data-logs');
 
             try {
-                images = JSON.parse(this.getAttribute("data-images") || "[]");
+                images = JSON.parse(button.getAttribute('data-images') || '[]');
             } catch (e) {
-                console.error("Ошибка парсинга изображений:", e);
+                console.error("Ошибка загрузки изображений:", e);
                 images = [];
             }
 
             currentImageIndex = 0;
-            updateCarousel();
+            updatePopupCarousel();
+            
+            elements.popupOverlay.style.display = "block";
+            elements.catalogPopup.style.display = "block";
+            document.body.style.overflow = "hidden";
+        };
 
-            popupOverlay.style.display = "block";
-            catalogPopup.style.display = "block";
-            document.body.style.overflow = "hidden"; // Отключаем прокрутку страницы
+        const closePopup = () => {
+            elements.popupOverlay.style.display = "none";
+            elements.catalogPopup.style.display = "none";
+            document.body.style.overflow = "auto";
+        };
+
+        // Event Listeners
+        elements.detailsButtons.forEach(btn => {
+            btn.addEventListener('click', () => showPopup(btn));
         });
-    });
 
-    function updateCarousel() {
-        popupCarouselTrack.innerHTML = "";
-        images.forEach((src, index) => {
-            const img = document.createElement("img");
-            img.src = src;
-            img.alt = "Фото услуги";
-            img.classList.add("popup-carousel-image");
-            if (index === currentImageIndex) img.classList.add("active");
-            popupCarouselTrack.appendChild(img);
+        elements.closePopupButton?.addEventListener('click', closePopup);
+        elements.popupOverlay?.addEventListener('click', (e) => {
+            if (e.target === elements.popupOverlay) closePopup();
         });
-    }
 
-    // 📌 Навигация в карусели
-    if (popupPrev && popupNext) {
-        popupPrev.addEventListener("click", function () {
+        elements.popupPrev?.addEventListener('click', () => {
             currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
-            updateCarousel();
+            updatePopupCarousel();
         });
 
-        popupNext.addEventListener("click", function () {
+        elements.popupNext?.addEventListener('click', () => {
             currentImageIndex = (currentImageIndex + 1) % images.length;
-            updateCarousel();
+            updatePopupCarousel();
         });
     }
 
-    // 📌 Закрытие всплывающего окна
-    if (closePopupButton) {
-        closePopupButton.addEventListener("click", function () {
-            popupOverlay.style.display = "none";
-            catalogPopup.style.display = "none";
-            document.body.style.overflow = "auto"; // Включаем прокрутку обратно
-        });
+    // 📌 Инициализация всех компонентов
+    function initAll() {
+        initMobileMenu();
+        initProductCarousels();
+        initCatalogFilter();
+        initPopup();
     }
 
-    if (popupOverlay) {
-        popupOverlay.addEventListener("click", function (event) {
-            if (event.target === popupOverlay) {
-                popupOverlay.style.display = "none";
-                catalogPopup.style.display = "none";
-                document.body.style.overflow = "auto";
+    initAll();
+});
+
+// 📌 Отзывы (отдельный обработчик для динамического контента)
+function initReviewsSlider() {
+    const slider = document.querySelector(".reviews-slider");
+    if (!slider) return;
+
+    let isDragging = false;
+    let startX;
+    let scrollLeft;
+
+    const handleDragStart = (e) => {
+        isDragging = true;
+        startX = e.pageX - slider.offsetLeft;
+        scrollLeft = slider.scrollLeft;
+        slider.style.scrollSnapType = "none";
+    };
+
+    const handleDragEnd = () => {
+        isDragging = false;
+        snapToNearestReview();
+    };
+
+    const handleDragMove = (e) => {
+        if (!isDragging) return;
+        const x = e.pageX - slider.offsetLeft;
+        const walk = (x - startX) * 1.2;
+        slider.scrollLeft = scrollLeft - walk;
+    };
+
+    const snapToNearestReview = () => {
+        const reviews = slider.querySelectorAll(".review-card");
+        let closest = { index: 0, distance: Infinity };
+
+        reviews.forEach((card, index) => {
+            const distance = Math.abs(slider.scrollLeft - card.offsetLeft);
+            if (distance < closest.distance) {
+                closest = { index, distance };
             }
         });
-    }
 
-    // 📌 Переход на страницу каталога
-    const fullCatalogButton = document.getElementById("btnFullCatalog");
-    if (fullCatalogButton) {
-        fullCatalogButton.addEventListener("click", function () {
-            window.location.href = "catalog.html";
+        slider.style.scrollSnapType = "x mandatory";
+        slider.scrollTo({
+            left: reviews[closest.index].offsetLeft,
+            behavior: "smooth"
         });
-    }
-});
+    };
+
+    // Event Listeners
+    slider.addEventListener('mousedown', handleDragStart);
+    slider.addEventListener('mouseup', handleDragEnd);
+    slider.addEventListener('mouseleave', handleDragEnd);
+    slider.addEventListener('mousemove', handleDragMove);
+}
+
+document.addEventListener("DOMContentLoaded", initReviewsSlider);

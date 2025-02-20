@@ -197,6 +197,20 @@ p {
     background-color: #E6A500;
 }
 
+
+.btn-primary {
+    display: inline-block;
+    background: #ffcc00;
+    color: #000;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    text-align: center;
+}
+
 /* Анимация */
 @keyframes fadeIn {
     from {
@@ -1256,3 +1270,112 @@ body.no-scroll {
 
 
 
+
+
+
+/* Общий стиль блока отзывов */
+.customer-reviews {
+    background: linear-gradient(135deg, #654321, #43210f);
+    padding: 50px 20px;
+    text-align: center;
+    color: #fff;
+}
+
+.reviews-heading {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.reviews-subtext {
+    font-size: 16px;
+    margin-bottom: 30px;
+    opacity: 0.8;
+}
+
+/* Контейнер слайдера */
+.reviews-wrapper {
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    max-width: 800px;
+    margin: auto;
+}
+
+/* Слайдер отзывов */
+.reviews-slider {
+    display: flex;
+    gap: 15px;
+    scroll-snap-type: x mandatory;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    scroll-behavior: smooth;
+    touch-action: pan-x;
+}
+
+.reviews-slider::-webkit-scrollbar {
+    display: none;
+}
+
+/* Карточка отзыва */
+.review-card {
+    flex: 0 0 100%;
+    max-width: 100%;
+    padding: 20px;
+    border-radius: 12px;
+    background: #f4e1c6;
+    color: #333;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+    scroll-snap-align: center;
+    text-align: left;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Имя пользователя */
+.review-name {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* Звёзды */
+.review-stars {
+    font-size: 16px;
+    color: #ffcc00;
+    margin-bottom: 10px;
+}
+
+/* Текст отзыва */
+.review-text {
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+/* Политика конфиденциальности */
+.site-footer {
+    margin-top: 30px;
+    font-size: 14px;
+    opacity: 0.7;
+}
+
+.site-footer a {
+    color: #ffcc00;
+    text-decoration: none;
+}
+
+.site-footer a:hover {
+    text-decoration: underline;
+}
+
+/* 📱 Адаптация для мобильных */
+@media (max-width: 768px) {
+    .reviews-heading {
+        font-size: 22px;
+    }
+    .review-card {
+        font-size: 14px;
+        max-width: 100%;
+    }
+}

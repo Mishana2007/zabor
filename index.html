@@ -15,28 +15,25 @@
     <header class="header">
         <div class="logo">ZABOR_ID</div>
         <nav class="menu">
-            <a href="#hero">Главная</a>
-            <a href="#">О нас</a>
-            <a href="catalog.html">Каталог</a>
-            <a href="#">Наши работы</a>
-            <a href="#">Отзывы</a>
-            <a href="#">Контакты</a>
+            <a href="index.html">Главная</a>
+            <a href="index.html#about">О нас</a>
+            <a href="index.html#workmy">Наши работы</a>
+            <a href="index.html#customer-reviews">Отзывы</a>
         </nav>
-        <button class="call-btn">Позвонить</button>
+        <button class="call-btn" onclick="window.location.href='tel:+79991234567'">Позвонить</button>
         <div class="burger-menu">
             <span></span>
             <span></span>
             <span></span>
         </div>
     </header>
-
+    
     <!-- Мобильное меню -->
     <nav class="mobile-menu">
-        <a href="#">Главная</a>
-        <a href="#">О нас</a>
-        <a href="#">Наши работы</a>
-        <a href="#">Отзывы</a>
-        <a href="#">Контакты</a>
+        <a href="index.html">Главная</a>
+        <a href="index.html#about">О нас</a>
+        <a href="index.html#workmy">Наши работы</a>
+        <a href="index.html#customer-reviews">Отзывы</a>
     </nav>
 
     <!-- Первый экран -->
@@ -45,12 +42,12 @@
             <h1>Надежные заборы, крыши и навесы под ключ</h1>
             <p>Гарантия качества и лучшие материалы</p>
             <div class="buttons">
-                <button class="btn-primary">Позвонить</button>
+                <button class="btn-primary" onclick="window.location.href='tel:+79818091843'">Позвонить</button>
             </div>
         </div>
     </section>
 
-    <section class="why-us">
+    <section id="about" class="why-us">
         <h2>Почему выбирают нас?</h2>
         <div class="why-container">
             <div class="why-item">
@@ -351,7 +348,7 @@
             <p class="products-call-text">
                 Если вам нужен другой товар, позвоните и уточните!
             </p>
-            <a href="tel:+79111234567" class="btn-call">Позвонить</a>
+            <button class="btn-primary" onclick="window.location.href='tel:+79818091843'">Позвонить</button>
         </div>
     </div>
 </section>
@@ -410,7 +407,7 @@
     </section>
 
 
-    <section class="portfolio-section">
+    <section id="workmy" class="portfolio-section">
         <div class="portfolio-header">
             <h2>Мое портфолио</h2>
             <p class="portfolio-description">
@@ -421,164 +418,58 @@
         </div>
     
         <div class="portfolio-grid">
-            <!-- Проект 1 -->
             <div class="portfolio-item">
-                <img src="img/порт1.jpg" alt="Металлический забор">
-                <div class="portfolio-content">
-                    <h3>Металлический забор</h3>
-                    <p>Прочный металлический забор с декоративными элементами, устойчивый к погодным условиям.</p>
-                </div>
+                <img src="img/порт1.jpg" alt="Проект 1">
             </div>
-    
-            <!-- Проект 2 -->
             <div class="portfolio-item">
-                <img src="img/порт2.jpg" alt="Деревянный забор">
-                <div class="portfolio-content">
-                    <h3>Деревянный забор</h3>
-                    <p>Классический деревянный забор, выполненный из натурального массива, обработанного антисептиком.</p>
-                </div>
+                <img src="img/порт2.jpg" alt="Проект 2">
             </div>
-    
-            <!-- Проект 3 -->
             <div class="portfolio-item">
-                <img src="img/порт3.jpg" alt="Автоматические ворота">
-                <div class="portfolio-content">
-                    <h3>Автоматические ворота</h3>
-                    <p>Современные ворота с автоматическим открытием, удобные в эксплуатации.</p>
-                </div>
+                <img src="img/порт3.jpg" alt="Проект 3">
             </div>
-    
-            <!-- Проект 4 -->
             <div class="portfolio-item">
-                <img src="img/порт4.jpg" alt="Калитка с ковкой">
-                <div class="portfolio-content">
-                    <h3>Калитка с ковкой</h3>
-                    <p>Калитка с элементами художественной ковки, подчеркивающая стиль вашего дома.</p>
-                </div>
+                <img src="img/порт4.jpg" alt="Проект 4">
             </div>
-    
-            <!-- Проект 5 -->
             <div class="portfolio-item">
-                <img src="img/порт5.jpg" alt="Кирпичный забор">
-                <div class="portfolio-content">
-                    <h3>Кирпичный забор</h3>
-                    <p>Классический кирпичный забор, обеспечивающий надежность и долгий срок службы.</p>
-                </div>
+                <img src="img/порт5.jpg" alt="Проект 5">
             </div>
-    
-            <!-- Проект 6 -->
             <div class="portfolio-item">
-                <img src="img/порт6.jpg" alt="Кованый забор">
-                <div class="portfolio-content">
-                    <h3>Кованый забор</h3>
-                    <p>Элегантный кованый забор с изысканным дизайном и антикоррозийной обработкой.</p>
-                </div>
+                <img src="img/порт6.jpg" alt="Проект 6">
             </div>
         </div>
     </section>
 
-    <section id="reviews" class="reviews">
+    <section id="customer-reviews" class="customer-reviews">
         <div class="container">
-            <h2 class="reviews-title">Отзывы наших клиентов</h2>
-            <p class="reviews-subtitle">Мы гордимся качеством нашей работы и доверием наших клиентов.</p>
+            <h2 class="reviews-heading">Отзывы наших клиентов</h2>
+            <p class="reviews-subtext">Мы гордимся качеством нашей работы и доверием наших клиентов.</p>
     
-            <div class="reviews-carousel" data-carousel>
-                <button class="prev" data-carousel-button="prev">&#10094;</button>
-                <div class="reviews-track">
-                    <!-- Отзыв 1 -->
-                    <div class="review">
-                        <div class="review-header">
-                            <h3>Иван Петров</h3>
-                            <div class="stars">⭐⭐⭐⭐⭐</div>
-                        </div>
-                        <p>Очень доволен забором! Все сделали быстро и качественно. Буду рекомендовать друзьям.</p>
+            <div class="reviews-wrapper">
+                <div class="reviews-slider">
+                    <div class="review-card">
+                        <h3 class="review-name">Иван Петров</h3>
+                        <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                        <p class="review-text">Очень доволен забором! Всё сделали быстро и качественно. Буду рекомендовать друзьям.</p>
                     </div>
     
-                    <!-- Отзыв 2 -->
-                    <div class="review">
-                        <div class="review-header">
-                            <h3>Ольга Смирнова</h3>
-                            <div class="stars">⭐⭐⭐⭐⭐</div>
-                        </div>
-                        <p>Заказали ворота, установили за 2 дня! Качество на высоте. Спасибо за работу!</p>
+                    <div class="review-card">
+                        <h3 class="review-name">Ольга Смирнова</h3>
+                        <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                        <p class="review-text">Заказали ворота, установили за 2 дня! Качество на высоте. Спасибо за работу!</p>
                     </div>
     
-                    <!-- Отзыв 3 -->
-                    <div class="review">
-                        <div class="review-header">
-                            <h3>Александр Кузнецов</h3>
-                            <div class="stars">⭐⭐⭐⭐⭐</div>
-                        </div>
-                        <p>Отличное соотношение цены и качества. Установщики - настоящие профессионалы!</p>
-                    </div>
-    
-                    <!-- Отзыв 4 -->
-                    <div class="review">
-                        <div class="review-header">
-                            <h3>Марина Белова</h3>
-                            <div class="stars">⭐⭐⭐⭐</div>
-                        </div>
-                        <p>Навес получился красивый, но немного задержали монтаж. В остальном супер.</p>
-                    </div>
-    
-                    <!-- Отзыв 5 -->
-                    <div class="review">
-                        <div class="review-header">
-                            <h3>Дмитрий Васильев</h3>
-                            <div class="stars">⭐⭐⭐⭐⭐</div>
-                        </div>
-                        <p>Самый крепкий забор, который я видел! Всё строго по договору, молодцы!</p>
-                    </div>
-    
-                    <!-- Отзыв 6 -->
-                    <div class="review">
-                        <div class="review-header">
-                            <h3>Анна Фёдорова</h3>
-                            <div class="stars">⭐⭐⭐⭐⭐</div>
-                        </div>
-                        <p>Калитка и забор смотрятся идеально! Спасибо за быструю установку!</p>
-                    </div>
-    
-                    <!-- Отзыв 7 -->
-                    <div class="review">
-                        <div class="review-header">
-                            <h3>Сергей Орлов</h3>
-                            <div class="stars">⭐⭐⭐⭐</div>
-                        </div>
-                        <p>Установили отлично, но пришлось ждать неделю. В целом доволен!</p>
-                    </div>
-    
-                    <!-- Отзыв 8 -->
-                    <div class="review">
-                        <div class="review-header">
-                            <h3>Елена Соколова</h3>
-                            <div class="stars">⭐⭐⭐⭐⭐</div>
-                        </div>
-                        <p>Быстрое обслуживание, качественные материалы. Всем рекомендую!</p>
-                    </div>
-    
-                    <!-- Отзыв 9 -->
-                    <div class="review">
-                        <div class="review-header">
-                            <h3>Максим Ильин</h3>
-                            <div class="stars">⭐⭐⭐⭐⭐</div>
-                        </div>
-                        <p>Автоматические ворота работают отлично! Рад, что обратился к вам.</p>
-                    </div>
-    
-                    <!-- Отзыв 10 -->
-                    <div class="review">
-                        <div class="review-header">
-                            <h3>Татьяна Романова</h3>
-                            <div class="stars">⭐⭐⭐⭐</div>
-                        </div>
-                        <p>Всё понравилось, но в комплекте не хватало замков, пришлось докупать.</p>
+                    <div class="review-card">
+                        <h3 class="review-name">Александр Кузнецов</h3>
+                        <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                        <p class="review-text">Отличное соотношение цены и качества. Установщики – настоящие профессионалы!</p>
                     </div>
                 </div>
-                <button class="next" data-carousel-button="next">&#10095;</button>
             </div>
         </div>
+    
+        <footer class="site-footer">
+            <p>&copy; 2025 Все права защищены | <a href="privacy.html">Политика конфиденциальности</a></p>
+        </footer>
     </section>
-
 </body>
 </html>

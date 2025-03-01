@@ -218,3 +218,28 @@ function initReviewsSlider() {
 }
 
 document.addEventListener("DOMContentLoaded", initReviewsSlider);
+
+
+// Показ модального окна при загрузке страницы
+document.addEventListener('DOMContentLoaded', function () {
+    const modal = document.getElementById('consent-modal');
+    const consentYes = document.getElementById('consent-yes');
+    const consentNo = document.getElementById('consent-no');
+
+    // Проверяем, было ли уже дано согласие
+    if (!localStorage.getItem('consentGiven')) {
+        modal.style.display = 'flex'; // Показываем модальное окно
+    }
+
+    // Обработка согласия
+    consentYes.addEventListener('click', function () {
+        localStorage.setItem('consentGiven', 'true'); // Сохраняем согласие
+        modal.style.display = 'none'; // Скрываем модальное окно
+    });
+
+    // Обработка отказа
+    consentNo.addEventListener('click', function () {
+        localStorage.setItem('consentGiven', 'false'); // Сохраняем отказ
+        window.location.href = 'https://google.com'; // Перенаправляем пользователя
+    });
+});
